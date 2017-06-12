@@ -82,6 +82,7 @@ namespace WcfServiceRest
             WebServiceHostFactory factory = new WebServiceHostFactory();
             //RouteTable.Routes.Add(new ServiceRoute("ServicePost", factory, typeof(RestService.ServicePost)));
             RouteTable.Routes.Add(new ServiceRoute("DataDictionaryService", factory, typeof(RestService.DataDictionaryService)));
+            RouteTable.Routes.Add(new ServiceRoute("FileUploadService", factory, typeof(RestService.FileUploadService)));
         }
     }
 }

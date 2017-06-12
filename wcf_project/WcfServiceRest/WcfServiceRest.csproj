@@ -95,12 +95,15 @@
       <DependentUpon>Global.asax</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Interface\IFileUploadService.cs" />
     <Compile Include="RestService\DataDictionaryService.cs" />
     <Compile Include="Interface\IDataDictionaryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestService\FileUploadService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\Daos.config">
