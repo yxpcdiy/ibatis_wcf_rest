@@ -1,4 +1,4 @@
-var baseUrl = "http://www.bdshequ.com/";
+var baseUrl = "http://www.wcf.com:8733/";
 
 $(function() {
 	/**

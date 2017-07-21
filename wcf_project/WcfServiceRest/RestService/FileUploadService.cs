@@ -25,8 +25,20 @@ namespace WcfServiceRest.RestService
         public FileUploadService()
         { }
 
-        public void Upload(Stream file, string encodingName)
+        public string Upload(Stream file, string encodingName)
         {
+            //初始化返回参数//////////////////////////////////////////////
+            string result = "";
+            UploadFileInfo obj = new UploadFileInfo();
+            obj._filefullpath = "";
+            obj._filename = "";
+            JSONObject<UploadFileInfo> objs = new JSONObject<UploadFileInfo>();
+            objs.Result = obj;
+            objs.rspCode = "001";
+            objs.rspDesc = "上传文件失败";
+            /////////////////////////////////////////////////////////////
+
+
             using (var ms = new MemoryStream())
             {
                 file.CopyTo(ms);
@@ -66,14 +78,41 @@ namespace WcfServiceRest.RestService
                 ms.Position = headerLength;
                 ////减去末尾的字符串：“ -- ”  
                 ms.SetLength(ms.Length - encoding.GetBytes(firstLine).LongLength - 3 * 2);
-
+                
                 using (var fileToupload = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "UploadFiles\\" + fileName, FileMode.Create))
                 {
                     ms.CopyTo(fileToupload);
                     fileToupload.Close();
                     fileToupload.Dispose();
                 }
+
+                obj._filename = fileName;
+                obj._filefullpath = @"http://www.wcf.com:8733/UploadFiles/" + fileName;
+
+                objs.Result = obj;
+                objs.rspCode = "000";
+                objs.rspDesc = "成功";
+                
             }
+            return JSONHelper.ObjectToJSON(objs);
         }
     }
+
+    public class UploadFileInfo
+    {
+        string filename = "";
+        public string _filename
+        {
+            get { return filename; }
+            set { filename = value; }
+        }
+        string filefullpath = "";
+
+        public string _filefullpath
+        {
+            get { return filefullpath; }
+            set { filefullpath = value; }
+        }
+    }
+
 }

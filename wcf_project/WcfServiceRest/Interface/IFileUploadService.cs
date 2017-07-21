@@ -19,7 +19,7 @@ namespace WcfServiceRest.Interface
         /// <param name="file">文件流</param>  
         /// <param name="encodingName">HTML的文字编码名</param>  
         [WebInvoke(Method = "POST", UriTemplate = "Upload/{encodingName}")]
-        void Upload(Stream file, string encodingName);
+        string Upload(Stream file, string encodingName);
 
     }
 }

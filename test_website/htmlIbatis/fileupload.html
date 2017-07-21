@@ -94,12 +94,14 @@
 $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
-    var url = "http://www.bdshequ.com/FileUploadService/Upload/utf-8";
+    var url = "http://www.wcf.com:8733/FileUploadService/Upload/utf-8";
     //window.location.hostname === 'blueimp.github.io' ?'//jquery-file-upload.appspot.com/' : 'server/php/';
     $('#fileupload').fileupload({
         url: url,
-        dataType: 'json',
+        //dataType: 'json',
+        autoUpload: true,
         done: function (e, data) {
+        	alert(data);
             $.each(data.result.files, function (index, file) {
                 $('<p/>').text(file.name).appendTo('#files');
             });
